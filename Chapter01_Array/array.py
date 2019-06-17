@@ -1,9 +1,5 @@
 class Array:
     def __init__(self, arr=None,capacity=10):
-        """
-        :param arr:
-        :param capacity:
-        """
         if isinstance(arr,list):
             self._data = arr[:]
             self._size = len(arr)
