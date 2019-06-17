@@ -3,6 +3,7 @@ from Chapter01_Array.array import Array
 
 class ArrayStack(Stackbase):
     def __init__(self,capacity=0):
+        """默认capacity为0"""
         self._array = Array(capacity)
 
     def push(self, e):
