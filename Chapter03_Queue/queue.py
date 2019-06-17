@@ -2,6 +2,7 @@ from Chapter01_Array.array import Array
 from Chapter03_Queue.base import Queuebase
 
 class ArrayQueue(Queuebase):
+    """数组队列"""
     def __init__(self,capacity=10):
         self._array = Array(capacity)
     def enqueue(self, e):
@@ -35,6 +36,7 @@ class ArrayQueue(Queuebase):
         return "".join(StringList)
 
 class LoopQueue(Queuebase):
+    """循环队列"""
     def __init__(self, capacity=10):
         """浪费一个空间"""
         self._data = [None] * (capacity + 1)
