@@ -105,6 +105,7 @@ class LinkList:
                 delNode = prev.next
                 prev.next = delNode.next
                 delNode.next = None
+                self._size -= 1
             else:
                 prev = prev.next
 
