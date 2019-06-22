@@ -76,7 +76,7 @@ class LinkList:
             cur = cur.next
         return False
 
-    def  remove(self, index):
+    def remove(self, index):
         """从链表中删除index位置的元素"""
         if index < 0 or index >= self._size:
             raise Exception("Illegal Index")
@@ -97,6 +97,17 @@ class LinkList:
         """从链表中删除最后一个位置的元素"""
         return self.remove(self._size - 1)
 
+    def remove_Element(self, e):
+        """删除链表中的元素"""
+        prev = self.dummy_head
+        while prev.next:
+            if prev.next.e == e:
+                delNode = prev.next
+                prev.next = delNode.next
+                delNode.next = None
+            else:
+                prev = prev.next
+
     def __str__(self):
         StringList = []
         cur = self.dummy_head.next
@@ -112,6 +123,8 @@ if __name__ == "__main__":
         linked_list.add_First(i)
         print(linked_list)
     linked_list.add(2,666)
+    print(linked_list)
+    linked_list.remove_Element(2)
     print(linked_list)
 
 
