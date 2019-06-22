@@ -45,11 +45,12 @@ class BST:
         if not node:
             self._size += 1
             return self._Node(e)
+        if node.e == e:
+            return node
         if node.e > e:
             node.left = self._add(node.left, e)
         else:
             node.right = self._add(node.right, e)
-
         return node
 
     def contains(self, e):
