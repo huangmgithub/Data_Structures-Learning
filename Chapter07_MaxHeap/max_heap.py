@@ -4,6 +4,10 @@ class MaxHeap:
     def __init__(self, arr=None, capacity=None):
         if isinstance(arr, Array):
             self._data = arr
+            # heapify
+            for i in range(self._parent(arr.get_Size() - 1), -1, -1):
+                self._sift_down(i)
+            return
         if not capacity:
             self._data = Array()
         else:
@@ -78,11 +82,30 @@ class MaxHeap:
         return ret
 
 if __name__ == "__main__":
+    # import random
+    # n = 100000
+    # max_heap = MaxHeap()
+    # for i in range(n):
+    #     max_heap.add(random.randint(0,2000))
+    #
+    # arr = []
+    # for i in range(1000):
+    #     arr.append(max_heap._extract_max())
+    #
+    # for i in range(1, 1000):
+    #     if arr[i - 1] < arr[i]:
+    #         raise Exception("Error")
+    # print("Test MaxHeap completed.")
+
+    # Test heapify
     import random
     n = 100000
-    max_heap = MaxHeap()
+    test_arr = Array()
     for i in range(n):
-        max_heap.add(random.randint(0,2000))
+        test_arr.add_Last(random.randint(0, 2000))
+
+    print(test_arr)
+    max_heap = MaxHeap(test_arr)
 
     arr = []
     for i in range(1000):
@@ -92,6 +115,3 @@ if __name__ == "__main__":
         if arr[i - 1] < arr[i]:
             raise Exception("Error")
     print("Test MaxHeap completed.")
-
-
-
