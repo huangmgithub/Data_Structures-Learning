@@ -126,7 +126,8 @@ class Array:
     def swap(self, i, j):
         """数组两元素交换"""
         if i < 0 or i >= self._size or j < 0 or j >= self._size:
-            self._data[i], self._data[j] = self._data[j], self._data[i]
+        	raise ValueError("Index is illegal")
+        self._data[i], self._data[j] = self._data[j], self._data[i]
     def __str__(self):
         """自定义打印"""
         StringList = []
