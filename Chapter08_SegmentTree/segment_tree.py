@@ -1,12 +1,12 @@
 class SegmentTree:
     def __init__(self, arr, merger):
         """线段树相当于将数组用一棵树重新表示"""
-        if not isinstance(arr,list) or not arr:
+        if not isinstance(arr,list) or not arr or not merger:
             raise ValueError('Can not initialize empty array.')
         self._data = arr[:]
         self._merger = merger  # 合并方式：最大值，最小值等功能
         self._tree = [None] * 4 * len(arr)
-        self._build_segment_tree(tree_index=0, l=0, r=len(arr) - 1)
+        self._build_segment_tree(tree_index = 0, l = 0, r = len(arr) - 1)
 
     def get_index(self, index):
         if index < 0 or index >= len(self._data):
@@ -36,8 +36,8 @@ class SegmentTree:
 
         self._tree[tree_index] = self._merger(self._tree[left_tree_index], self._tree[right_tree_index])
 
-
     def query(self, query_l, query_r):
+        """查询"""
         if query_l < 0 or query_l >= len(self._data) or \
                 query_r < 0 or query_r >= len(self._data) or query_l > query_r:
             raise ValueError("Index is illegal")
@@ -60,6 +60,32 @@ class SegmentTree:
         left_result = self._query(left_tree_index, l, mid, query_l, mid)
         right_result = self._query(right_tree_index, mid + 1, r, mid + 1, query_r)
         return self._merger(left_result, right_result)
+
+
+    def set(self, index, e):
+        """将index位置的值更新为e"""
+        if index < 0 or index >= len(self._data):
+            raise Exception('Get Failed, Index is illegal')
+        self._data[index] = e
+        self._set(0, 0, len(self._data) - 1, index, e)
+
+    def _set(self, tree_index, l, r, index, e):
+        """在tree_index为根的线段树中更新index的值为e"""
+        if l == r:
+            self._tree[tree_index] = e  #先更新最底层的索引的值
+            return
+        mid = (l + r) // 2
+        left_tree_index = self._left_child(tree_index)
+        right_tree_index = self._right_child(tree_index)
+
+        if index >= mid + 1: #在右子树
+            self._set(right_tree_index, mid + 1, r, index, e)
+        else:
+            self._set(left_tree_index, l, mid, index, e)
+
+        #更新各个区间的索引的值
+        self._tree[tree_index]  = self._merger(self._tree[left_tree_index], self._tree[right_tree_index])
+
 
     def __str__(self):
         res = []
