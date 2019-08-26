@@ -63,7 +63,7 @@ class BST:
             return False
         if node.e == e:
             return True
-        elif node.e < e:
+        elif node.e > e:
             return self._contains(node.left, e)
         else:
             return self._contains(node.right, e)
